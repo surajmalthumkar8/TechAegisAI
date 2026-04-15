@@ -4,14 +4,17 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { HeroCanvas } from "@/components/three/HeroCanvas";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-20">
         <div className="absolute left-1/2 top-[-20%] h-[640px] w-[640px] -translate-x-1/2 rounded-full bg-accent-violet/25 blur-[160px]" />
         <div className="absolute left-[20%] top-[40%] h-[320px] w-[320px] rounded-full bg-accent-cyan/20 blur-[140px]" />
       </div>
+
+      <HeroCanvas />
 
       <div className="container flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center py-28 text-center">
         <motion.div
