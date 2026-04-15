@@ -1,6 +1,10 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/utils";
-import { getAllServices, getAllCaseStudies } from "@/lib/content";
+import {
+  getAllServices,
+  getAllCaseStudies,
+  getAllBlogPosts,
+} from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
@@ -29,5 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...caseStudyRoutes];
+  const blogRoutes = getAllBlogPosts().map((p) => ({
+    url: `${base}/blog/${p.slug}`,
+    lastModified: new Date(p.updatedAt ?? p.publishedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...caseStudyRoutes, ...blogRoutes];
 }
