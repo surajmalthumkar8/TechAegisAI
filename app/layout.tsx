@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "sonner";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { buildMetadata } from "@/lib/seo";
@@ -26,6 +27,17 @@ export default function RootLayout({
         <Navbar />
         <main className="relative">{children}</main>
         <Footer />
+        <Toaster
+          theme="dark"
+          position="bottom-right"
+          toastOptions={{
+            style: {
+              background: "hsl(var(--elevated))",
+              color: "hsl(var(--foreground))",
+              border: "1px solid hsl(var(--border))",
+            },
+          }}
+        />
         <Analytics />
         <SpeedInsights />
       </body>
