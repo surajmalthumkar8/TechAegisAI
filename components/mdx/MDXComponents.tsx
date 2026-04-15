@@ -3,16 +3,34 @@ import type { ReactNode } from "react";
 
 type Kids = { children?: ReactNode };
 
+function slugify(children: ReactNode): string {
+  const text = typeof children === "string" ? children : String(children ?? "");
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+}
+
 export const mdxComponents = {
   h1: ({ children }: Kids) => (
     <h1 className="mt-12 text-4xl font-semibold tracking-tight">{children}</h1>
   ),
-  h2: ({ children }: Kids) => (
-    <h2 className="mt-12 text-2xl font-semibold tracking-tight">{children}</h2>
-  ),
-  h3: ({ children }: Kids) => (
-    <h3 className="mt-8 text-lg font-semibold tracking-tight">{children}</h3>
-  ),
+  h2: ({ children }: Kids) => {
+    const id = slugify(children);
+    return (
+      <h2 id={id} className="mt-12 scroll-mt-24 text-2xl font-semibold tracking-tight">
+        {children}
+      </h2>
+    );
+  },
+  h3: ({ children }: Kids) => {
+    const id = slugify(children);
+    return (
+      <h3 id={id} className="mt-8 scroll-mt-24 text-lg font-semibold tracking-tight">
+        {children}
+      </h3>
+    );
+  },
   p: ({ children }: Kids) => (
     <p className="mt-5 leading-relaxed text-foreground/90">{children}</p>
   ),

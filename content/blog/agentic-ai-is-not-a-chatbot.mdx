@@ -1,0 +1,31 @@
+---
+title: Agentic AI is not a chatbot
+excerpt: If your AI still needs someone to prompt it, it's not agentic. Here's the mental model that actually matters, and how to tell when you need it.
+author: Suraj Malthumkar
+publishedAt: 2026-03-28
+tags: [agents, strategy, primer]
+---
+
+Every vendor pitch in Q1 2026 used the word "agentic." Most of them didn't know what it meant.
+
+A chatbot waits for you. You ask a question, it answers, the loop ends. Useful for some things — mostly not the ones that matter.
+
+An agent loops on its own. It reads context, picks an action from a menu of tools, takes the action, checks its work, and decides whether to keep going. No one has to prompt it. That's the actual difference.
+
+## When you need an agent
+
+You need an agent when the work has these three shapes at once:
+
+1. **Multi-step** — pulling from one place, writing to another, reconciling a third.
+2. **Bursty** — volume is high but uneven. A human could do it but not cost-effectively.
+3. **Forgiving** — small errors are recoverable, or you can route exceptions to a human.
+
+Sales triage fits. Invoice-to-cash fits. Support ticket enrichment fits. Drug discovery and legal memos don't — the cost of a wrong step is too high.
+
+## The part people skip
+
+An agent without evaluation is just a Rube Goldberg machine. You need a way to measure whether the thing is pulling its weight — agreement-with-human scores, recovery rate on exceptions, dollar-impact per run. If you can't measure it, you can't trust it in production, and you definitely can't hand it off to ops.
+
+## The tell
+
+Ask a vendor: "What happens if the agent gets it wrong on row 437 of a 10,000-row batch?" If the answer is a live demo of the happy path, you're looking at a chatbot with extra steps.
