@@ -2,6 +2,7 @@ import { Hero } from "@/components/marketing/Hero";
 import { MarqueeLogos } from "@/components/marketing/MarqueeLogos";
 import { ServicesGrid } from "@/components/marketing/ServicesGrid";
 import { MetricBand } from "@/components/marketing/MetricBand";
+import { HowWeShip } from "@/components/marketing/HowWeShip";
 import { FeaturedCaseStudies } from "@/components/marketing/FeaturedCaseStudies";
 import { Testimonials } from "@/components/marketing/Testimonials";
 import { CTABand } from "@/components/layout/CTABand";
@@ -20,6 +21,7 @@ export default function HomePage() {
       <MarqueeLogos />
       <ServicesGrid />
       <MetricBand />
+      <HowWeShip />
       <FeaturedCaseStudies />
       <Testimonials />
       <CTABand />
