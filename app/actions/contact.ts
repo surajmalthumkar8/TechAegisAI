@@ -76,7 +76,7 @@ export async function submitContact(
       return {
         status: "error",
         errors: {},
-        message: "Couldn't send right now. Email hello@techaegisai.com directly.",
+        message: "Couldn't send right now. Email surajm@techaegisai.com directly.",
       };
     }
   } else {
