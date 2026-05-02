@@ -5,6 +5,18 @@ import {
   Boxes,
   GraduationCap,
   Compass,
+  Database,
+  CreditCard,
+  Mail,
+  FileText,
+  Send,
+  GitPullRequest,
+  ShoppingCart,
+  Headphones,
+  Sparkles,
+  Atom,
+  Activity,
+  Cloud,
   type LucideIcon,
 } from "lucide-react";
 
@@ -110,4 +122,25 @@ export const logos = [
   "Relay",
   "Obsidian",
   "Signal",
+];
+
+// Real platforms our agents reach into. Categorical lucide icons (no brand
+// SVGs) so we side-step trademark concerns. Names match what shows up in the
+// LiveAgent pipeline so the visual story ties together top-to-bottom.
+export type StackItem = { icon: LucideIcon; name: string };
+
+export const stack: StackItem[] = [
+  { icon: Database, name: "Postgres" },
+  { icon: CreditCard, name: "Stripe" },
+  { icon: Mail, name: "Gmail" },
+  { icon: Send, name: "Slack" },
+  { icon: FileText, name: "Notion" },
+  { icon: GitPullRequest, name: "GitHub" },
+  { icon: LineChart, name: "HubSpot" },
+  { icon: ShoppingCart, name: "Shopify" },
+  { icon: Headphones, name: "Zendesk" },
+  { icon: Sparkles, name: "OpenAI" },
+  { icon: Atom, name: "Anthropic" },
+  { icon: Activity, name: "Datadog" },
+  { icon: Cloud, name: "AWS" },
 ];
