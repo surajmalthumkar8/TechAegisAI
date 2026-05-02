@@ -15,7 +15,7 @@ export function CTABand() {
             Ready to put <span className="gradient-text">AI to work</span>?
           </h2>
           <p className="mt-4 text-pretty text-muted-foreground">
-            30-minute consult. No slides. We leave with a scoped plan or tell you
+            60-minute call. No slides. We leave with a scoped plan or tell you
             you&apos;re not ready.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
