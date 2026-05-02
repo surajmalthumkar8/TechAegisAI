@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Linkedin, Github } from "lucide-react";
@@ -107,13 +106,12 @@ export function HeroVideo() {
               href="/"
               className="flex items-center gap-2.5 text-lg font-semibold tracking-tight"
             >
-              <Image
-                src="/logo.png"
+              <img
+                src="/logo.svg"
                 alt=""
                 className="size-6 object-contain"
                 width={24}
                 height={24}
-                priority
               />
               <span>TechAegisAI</span>
             </Link>

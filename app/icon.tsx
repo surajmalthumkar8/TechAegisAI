@@ -13,15 +13,17 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #e23a3e 0%, #b71f23 100%)",
-          color: "white",
-          fontSize: 18,
+          background:
+            "radial-gradient(circle at 50% 30%, #ff7376 0%, #e23a3e 55%, #7a1318 100%)",
+          color: "#1a0405",
+          fontSize: 22,
           fontWeight: 700,
-          letterSpacing: "-0.04em",
-          borderRadius: 6,
+          fontFamily: "Georgia, serif",
+          letterSpacing: "-0.02em",
+          borderRadius: 8,
         }}
       >
-        TA
+        T
       </div>
     ),
     { ...size },
