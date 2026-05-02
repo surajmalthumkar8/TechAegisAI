@@ -11,23 +11,66 @@ import {
   Send,
   Mail,
   FileText,
-  GitPullRequest,
   CreditCard,
   type LucideIcon,
 } from "lucide-react";
 
 type LineKind = "agent" | "think" | "tool" | "ok" | "warn" | "sep";
 type Line = { d: number; kind: LineKind; html: string };
+type StepStatus = "pending" | "active" | "done";
 
-const TOOL_ICONS: Record<string, LucideIcon> = {
-  "db.query": Database,
-  "stripe.refund": CreditCard,
-  "gmail.draft": Mail,
-  "notion.append": FileText,
-  "slack.send": Send,
-  "github.pr": GitPullRequest,
-  "eval.score": Zap,
+type Step = {
+  id: string;
+  icon: LucideIcon;
+  name: string;
+  tool: string;
+  doneDetail: string;
 };
+
+const PIPELINE: Step[] = [
+  {
+    id: "db.query",
+    icon: Database,
+    name: "Read context",
+    tool: "db.query",
+    doneDetail: "10 rows · 84ms",
+  },
+  {
+    id: "stripe.refund",
+    icon: CreditCard,
+    name: "Process refund",
+    tool: "stripe.refund",
+    doneDetail: "$28.90 · 412ms",
+  },
+  {
+    id: "gmail.draft",
+    icon: Mail,
+    name: "Draft customer email",
+    tool: "gmail.draft",
+    doneDetail: "human review · 184ms",
+  },
+  {
+    id: "notion.append",
+    icon: FileText,
+    name: "Log resolution",
+    tool: "notion.append",
+    doneDetail: "ops/log/2026-W18 · 96ms",
+  },
+  {
+    id: "eval.score",
+    icon: Zap,
+    name: "Score the trace",
+    tool: "eval.score",
+    doneDetail: "faith=0.96 · cost=$0.011",
+  },
+  {
+    id: "slack.send",
+    icon: Send,
+    name: "Notify ops",
+    tool: "slack.send",
+    doneDetail: "#ops-alerts · 137ms",
+  },
+];
 
 const SCRIPT: Line[] = [
   { d: 0, kind: "agent", html: "run #4129 · queue=order_exceptions · ctx=last_24h" },
@@ -51,21 +94,112 @@ const SCRIPT: Line[] = [
   { d: 4700, kind: "agent", html: "run #4130 · queue=lead_enrichment · ctx=new_signups" },
 ];
 
+const LOOP_MS = 5500;
+
 const pad = (n: number, w = 2) => String(n).padStart(w, "0");
 const ts = (start: Date, ms: number) => {
   const t = new Date(start.getTime() + ms);
   return `${pad(t.getHours())}:${pad(t.getMinutes())}:${pad(t.getSeconds())}.${pad(t.getMilliseconds(), 3)}`;
 };
 
+function PipelineStep({
+  step,
+  status,
+  isLast,
+}: {
+  step: Step;
+  status: StepStatus;
+  isLast: boolean;
+}) {
+  const Icon = step.icon;
+  const ringClass =
+    status === "active"
+      ? "border-brand-red-soft/50 bg-brand-red-soft/[0.04] shadow-[0_0_30px_-10px_rgba(255,94,98,0.45)]"
+      : status === "done"
+        ? "border-emerald-400/20 bg-black/30"
+        : "border-white/[0.06] bg-black/20";
+  const iconBgClass =
+    status === "active"
+      ? "bg-brand-red-soft/15 text-brand-red-soft ring-1 ring-brand-red-soft/40"
+      : status === "done"
+        ? "bg-emerald-400/10 text-emerald-400 ring-1 ring-emerald-400/20"
+        : "bg-white/[0.03] text-white/30";
+  const titleClass =
+    status === "pending" ? "text-white/40" : "text-white";
+  const toolClass =
+    status === "active"
+      ? "text-brand-red-soft"
+      : status === "done"
+        ? "text-emerald-400/80"
+        : "text-white/30";
+
+  return (
+    <li className="relative">
+      <div
+        className={`flex items-center gap-3 rounded-xl border p-3 transition-all duration-300 md:gap-4 md:p-4 ${ringClass}`}
+      >
+        <div
+          className={`flex size-10 flex-none items-center justify-center rounded-lg transition-colors ${iconBgClass}`}
+        >
+          {status === "active" ? (
+            <span className="relative flex size-2.5">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand-red-soft opacity-75" />
+              <Icon className="size-4" />
+            </span>
+          ) : (
+            <Icon className="size-4" />
+          )}
+        </div>
+        <div className="min-w-0 flex-1">
+          <div
+            className={`text-sm font-medium tracking-tight transition-colors ${titleClass}`}
+          >
+            {step.name}
+          </div>
+          <div
+            className={`mt-0.5 truncate font-mono text-[11px] transition-colors ${toolClass}`}
+          >
+            {status === "done" ? step.doneDetail : step.tool}
+          </div>
+        </div>
+        <div className="ml-auto flex flex-none items-center">
+          {status === "done" && (
+            <CheckCircle2 className="size-4 text-emerald-400" />
+          )}
+          {status === "active" && (
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand-red-soft opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-brand-red-soft" />
+            </span>
+          )}
+          {status === "pending" && (
+            <span className="size-2 rounded-full bg-white/10" />
+          )}
+        </div>
+      </div>
+      {!isLast && (
+        <div
+          className={`ml-7 h-4 w-px transition-colors duration-500 ${
+            status === "done"
+              ? "bg-emerald-400/30"
+              : status === "active"
+                ? "bg-brand-red-soft/40"
+                : "bg-white/10"
+          }`}
+          aria-hidden
+        />
+      )}
+    </li>
+  );
+}
+
 export function LiveAgentSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const bodyRef = useRef<HTMLDivElement>(null);
-  const [stats, setStats] = useState({
-    calls: 0,
-    runs: 0,
-    lastTool: "db.query",
-  });
+  const [stats, setStats] = useState({ calls: 0, runs: 0 });
+  const [activeStep, setActiveStep] = useState<string | null>(null);
+  const [doneSteps, setDoneSteps] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     if (!inView) return;
@@ -76,12 +210,23 @@ export function LiveAgentSection() {
     let runCount = 0;
     const timeouts: number[] = [];
 
-    const run = () => {
+    const tick = () => {
       if (stopped) return;
-      const offset = loop * 5500;
+      const offset = loop * LOOP_MS;
+
+      // Reset pipeline state at start of each loop
+      timeouts.push(
+        window.setTimeout(() => {
+          if (stopped) return;
+          setActiveStep(null);
+          setDoneSteps(new Set());
+        }, offset),
+      );
+
       SCRIPT.forEach((line) => {
         const id = window.setTimeout(() => {
           if (stopped || !bodyRef.current) return;
+
           const div = document.createElement("div");
           div.className = `term-line ${line.kind}`;
           const tsEl = `<span class="text-white/30 mr-3">${ts(start, line.d + offset)}</span>`;
@@ -112,10 +257,23 @@ export function LiveAgentSection() {
           if (line.kind === "tool") {
             toolCalls++;
             const match = line.html.match(/<b>([^<]+)<\/b>/);
-            setStats({
-              calls: toolCalls,
-              runs: runCount,
-              lastTool: match?.[1] || "tool",
+            const toolId = match?.[1];
+            if (toolId) {
+              setActiveStep(toolId);
+              setStats((s) => ({ ...s, calls: toolCalls }));
+            }
+          }
+          if (line.kind === "ok") {
+            // Mark the currently active step done.
+            setActiveStep((current) => {
+              if (current) {
+                setDoneSteps((prev) => {
+                  const next = new Set(prev);
+                  next.add(current);
+                  return next;
+                });
+              }
+              return null;
             });
           }
           if (line.kind === "agent" && line.html.includes("closed")) {
@@ -123,19 +281,20 @@ export function LiveAgentSection() {
             setStats((s) => ({ ...s, runs: runCount }));
           }
 
-          while (bodyRef.current && bodyRef.current.children.length > 24) {
+          while (bodyRef.current && bodyRef.current.children.length > 18) {
             bodyRef.current.removeChild(bodyRef.current.firstChild!);
           }
         }, line.d + offset);
         timeouts.push(id);
       });
+
       const loopId = window.setTimeout(() => {
         loop++;
-        run();
-      }, 5500);
+        tick();
+      }, LOOP_MS);
       timeouts.push(loopId);
     };
-    run();
+    tick();
 
     return () => {
       stopped = true;
@@ -178,7 +337,7 @@ export function LiveAgentSection() {
             <h2 className="m-0 max-w-2xl text-4xl leading-[1.05] tracking-tight text-white md:text-6xl">
               A real agent run,{" "}
               <em className="font-serif italic text-brand-red-soft">
-                printing in real time.
+                executing live, end-to-end.
               </em>
             </h2>
           </div>
@@ -221,59 +380,59 @@ export function LiveAgentSection() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px]">
-            <div
-              ref={bodyRef}
-              className="h-[460px] overflow-hidden px-6 py-5 font-mono text-[12.5px] leading-[1.7]"
-            />
-            <div className="flex flex-col gap-5 border-t border-white/5 bg-black/30 p-6 lg:border-l lg:border-t-0">
-              <div>
-                <div className="mb-1.5 font-mono text-[10px] uppercase tracking-widest text-white/40">
-                  Tool calls
+          <div className="grid grid-cols-1 gap-px lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            {/* Pipeline */}
+            <div className="bg-black/30 p-5 md:p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="font-mono text-[10px] uppercase tracking-widest text-white/40">
+                  Pipeline
                 </div>
-                <div className="font-serif text-3xl italic text-white">
-                  {String(stats.calls).padStart(4, "0")}
+                <div className="font-mono text-[10px] text-white/40">
+                  6 steps · 1 customer ticket
                 </div>
               </div>
-              <div>
-                <div className="mb-1.5 font-mono text-[10px] uppercase tracking-widest text-white/40">
-                  Runs closed
+              <ol className="space-y-0 list-none p-0">
+                {PIPELINE.map((step, i) => {
+                  const status: StepStatus = doneSteps.has(step.id)
+                    ? "done"
+                    : activeStep === step.id
+                      ? "active"
+                      : "pending";
+                  return (
+                    <PipelineStep
+                      key={step.id}
+                      step={step}
+                      status={status}
+                      isLast={i === PIPELINE.length - 1}
+                    />
+                  );
+                })}
+              </ol>
+              <div className="mt-5 flex items-center justify-between border-t border-white/5 pt-4 font-mono text-[10px] uppercase tracking-widest text-white/40">
+                <div>
+                  Tool calls{" "}
+                  <span className="ml-1 font-serif text-base italic text-white">
+                    {String(stats.calls).padStart(4, "0")}
+                  </span>
                 </div>
-                <div className="font-serif text-3xl italic text-white">
-                  {String(stats.runs).padStart(2, "0")}
-                </div>
-              </div>
-              <div>
-                <div className="mb-1.5 font-mono text-[10px] uppercase tracking-widest text-white/40">
-                  Last tool
-                </div>
-                <div className="font-mono text-sm text-brand-red-soft">
-                  {stats.lastTool}
-                </div>
-              </div>
-              <div className="mt-auto border-t border-white/5 pt-4">
-                <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-white/40">
-                  Available tools
-                </div>
-                <div className="grid grid-cols-4 gap-2">
-                  {Object.entries(TOOL_ICONS).map(([name, Icon]) => {
-                    const active = stats.lastTool === name;
-                    return (
-                      <div
-                        key={name}
-                        title={name}
-                        className={`flex aspect-square items-center justify-center rounded-lg transition-all duration-300 ${
-                          active
-                            ? "scale-110 bg-brand-red-soft/20 text-brand-red-soft ring-1 ring-brand-red-soft/60"
-                            : "bg-white/[0.03] text-white/30"
-                        }`}
-                      >
-                        <Icon size={14} />
-                      </div>
-                    );
-                  })}
+                <div>
+                  Runs closed{" "}
+                  <span className="ml-1 font-serif text-base italic text-white">
+                    {String(stats.runs).padStart(2, "0")}
+                  </span>
                 </div>
               </div>
+            </div>
+
+            {/* Terminal */}
+            <div className="border-t border-white/5 bg-black/40 lg:border-l lg:border-t-0">
+              <div className="border-b border-white/5 px-5 py-2.5 font-mono text-[10px] uppercase tracking-widest text-white/40">
+                Stream
+              </div>
+              <div
+                ref={bodyRef}
+                className="h-[440px] overflow-hidden px-5 py-4 font-mono text-[12px] leading-[1.7] md:px-6"
+              />
             </div>
           </div>
         </motion.div>
@@ -287,8 +446,8 @@ export function LiveAgentSection() {
           <div className="flex items-center gap-2">
             <AlertCircle size={12} />
             <span>
-              Anonymized trace from a customer&apos;s order-exception loop. Updated
-              every 5s.
+              Anonymized trace from a customer&apos;s order-exception loop.
+              Updated every 5s.
             </span>
           </div>
           <a
