@@ -3,7 +3,7 @@ import { logos } from "@/lib/data";
 export function MarqueeLogos() {
   const doubled = [...logos, ...logos];
   return (
-    <section className="bg-black py-16">
+    <section className="overflow-hidden bg-black py-16">
       <p className="text-center font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
         Trusted by teams shipping AI into production
       </p>

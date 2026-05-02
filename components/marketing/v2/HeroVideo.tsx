@@ -153,9 +153,9 @@ export function HeroVideo() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-8 whitespace-nowrap font-serif tracking-tight text-white"
+          className="mb-8 font-serif tracking-tight text-white md:whitespace-nowrap"
           style={{
-            fontSize: "clamp(3.5rem, 11vw, 9rem)",
+            fontSize: "clamp(2.5rem, 11vw, 9rem)",
             lineHeight: 0.95,
           }}
         >
