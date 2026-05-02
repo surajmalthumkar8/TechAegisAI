@@ -34,9 +34,13 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-5">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-md bg-accent-gradient">
-                <span className="text-[11px] font-bold text-background">TA</span>
-              </span>
+              <img
+                src="/logo.svg"
+                alt=""
+                width={28}
+                height={28}
+                className="size-7 shrink-0"
+              />
               <span className="text-sm font-semibold tracking-tight">
                 {siteConfig.name}
               </span>

@@ -22,10 +22,13 @@ export function MarqueeLogos() {
             return (
               <div
                 key={`${item.name}-${i}`}
-                className="group inline-flex shrink-0 items-center gap-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-2 transition-colors hover:border-brand-red-soft/40 hover:bg-brand-red-soft/[0.06]"
+                className="inline-flex shrink-0 items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 transition-colors hover:border-white/20 hover:bg-white/[0.06]"
               >
-                <Icon className="size-4 text-white/50 transition-colors group-hover:text-brand-red-soft" />
-                <span className="text-sm font-medium tracking-tight text-white/70 transition-colors group-hover:text-white">
+                <Icon
+                  className="size-4 shrink-0"
+                  style={{ color: item.color }}
+                />
+                <span className="text-sm font-medium tracking-tight text-white/85">
                   {item.name}
                 </span>
               </div>

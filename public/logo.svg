@@ -1,29 +1,57 @@
-<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TechAegisAI">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TechAegisAI">
   <defs>
-    <linearGradient id="ta-shield" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ff5e62"/>
-      <stop offset="55%" stop-color="#e23a3e"/>
-      <stop offset="100%" stop-color="#7a1318"/>
+    <linearGradient id="ta-shield-bg" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b6e"/>
+      <stop offset="35%" stop-color="#e23a3e"/>
+      <stop offset="100%" stop-color="#4a0a0d"/>
     </linearGradient>
-    <radialGradient id="ta-boss" cx="50%" cy="35%" r="65%">
-      <stop offset="0%" stop-color="#ff7376"/>
-      <stop offset="100%" stop-color="#5a0d11"/>
+    <radialGradient id="ta-medallion" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#e8484c"/>
+      <stop offset="80%" stop-color="#5a0d11"/>
+      <stop offset="100%" stop-color="#2a0305"/>
     </radialGradient>
+    <linearGradient id="ta-gloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff9a9c" stop-opacity="0.55"/>
+      <stop offset="35%" stop-color="#ff8a8c" stop-opacity="0"/>
+    </linearGradient>
   </defs>
-  <path
-    d="M32 3 C50 3, 58 11, 58 22 L58 38 C58 50, 47 58, 32 61 C17 58, 6 50, 6 38 L6 22 C6 11, 14 3, 32 3 Z"
-    fill="url(#ta-shield)"
-    stroke="#3a0507"
-    stroke-width="1"
-  />
-  <circle cx="32" cy="30" r="17" fill="url(#ta-boss)" stroke="#3a0507" stroke-width="0.6"/>
-  <text
-    x="32"
-    y="38"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-size="22"
-    font-weight="700"
-    text-anchor="middle"
-    fill="#1a0405"
-  >T</text>
+
+  <!-- Outer shield with side flares (heater shape with decorative shoulders) -->
+  <path d="M50 5
+           C28 5, 14 12, 12 22
+           L9 26
+           L13 32
+           L13 58
+           C13 76, 28 89, 50 95
+           C72 89, 87 76, 87 58
+           L87 32
+           L91 26
+           L88 22
+           C86 12, 72 5, 50 5 Z"
+        fill="url(#ta-shield-bg)"
+        stroke="#1f0203"
+        stroke-width="0.8"/>
+
+  <!-- Top gloss highlight -->
+  <path d="M50 5
+           C28 5, 14 12, 12 22
+           L9 26
+           L13 32
+           L13 58
+           C13 76, 28 89, 50 95
+           C72 89, 87 76, 87 58
+           L87 32
+           L91 26
+           L88 22
+           C86 12, 72 5, 50 5 Z"
+        fill="url(#ta-gloss)"/>
+
+  <!-- Inner medallion ring -->
+  <circle cx="50" cy="42" r="24" fill="none" stroke="#1f0203" stroke-width="0.6"/>
+  <circle cx="50" cy="42" r="22" fill="url(#ta-medallion)"/>
+
+  <!-- T letter -->
+  <text x="50" y="55" font-family="Georgia, 'Times New Roman', serif"
+        font-size="32" font-weight="700" text-anchor="middle"
+        fill="#1a0405">T</text>
 </svg>
