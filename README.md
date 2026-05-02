@@ -4,12 +4,12 @@ Production-grade marketing site for TechAegisAI — an AI consulting practice.
 
 ## Stack
 
-- **Framework**: Next.js 15 (App Router, React 19, Turbopack dev)
-- **Styling**: Tailwind v3.4 + custom design tokens + shadcn-style primitives
-- **3D / interactive**: Three.js + React Three Fiber + drei + postprocessing, GSAP + ScrollTrigger, Framer Motion
+- **Framework**: Next.js 16 (App Router, React 19, Turbopack dev)
+- **Styling**: Tailwind v3.4 + custom design tokens + liquid-glass utilities + Instrument Serif (display) + Geist (sans + mono)
+- **Motion**: Framer Motion. (R3F + Three.js + GSAP still in tree at `app/legacy/_components/` for the archived v1 hero — not loaded on `/`.)
 - **Content**: MDX via gray-matter + next-mdx-remote/rsc (services, case studies, blog posts)
 - **Forms**: Server Actions + Zod validation + Resend + Upstash rate-limit
-- **Booking**: Cal.com embed
+- **Booking**: Cal.com embed, surfaced on `/contact` and via the homepage `BookCallDialog` modal
 - **Analytics**: Vercel Analytics + Speed Insights (GA4 wiring parked behind a consent gate)
 - **Deploy**: Vercel
 
@@ -61,11 +61,13 @@ echo "new file" > content/blog/my-new-post.mdx
 | PR | Scope | Status |
 |----|------|--------|
 | #1 | Landing v1 (hero, services, metrics, testimonials, cta, marquee) | shipped |
-| #2 | 3D hero (r3f network, mobile + reduced-motion fallback) | shipped |
+| #2 | 3D hero (r3f network, mobile + reduced-motion fallback) | shipped (archived to `/legacy`) |
 | #3 | MDX content pipeline (services + case studies, og, sitemap) | shipped |
 | #4 | Blog (list + post, toc, reading progress, rss) | shipped |
 | #5 | Pricing + contact (resend + upstash + cal.com) | shipped |
 | #6 | About + founder page | shipped |
-| #7 | Polish (gsap scroll narrative, ci, docs) | this PR |
+| #7 | Polish (gsap scroll narrative, ci, docs) | shipped |
+| #8 | Next 16 + flat ESLint + email tweak | shipped |
+| #9 | Liquid-glass redesign — homepage swap to video hero + live agent terminal + modal Cal embed; v1 marketing parked at `_archive/2026-05-02/` and `/legacy` | this PR |
 
 Plan lives in [CLAUDE.md](./CLAUDE.md).
