@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { LazyVideo } from "./LazyVideo";
 
 const VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260402_054547_9875cfc5-155a-4229-8ec8-b7ba7125cbf8.mp4";
@@ -22,13 +23,12 @@ export function FeaturedVideoSection() {
           transition={{ duration: 0.9 }}
           className="relative aspect-video overflow-hidden rounded-3xl bg-[#0a0a0a]"
         >
-          <video
+          <LazyVideo
             src={VIDEO}
             muted
             autoPlay
             loop
             playsInline
-            preload="auto"
             className="size-full object-cover"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />

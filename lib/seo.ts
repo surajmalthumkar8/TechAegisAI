@@ -37,6 +37,6 @@ export function buildMetadata({
       description: desc,
       images: [ogImage],
     },
-    icons: { icon: "/favicon.ico" },
+    // Icons are auto-discovered from app/icon.tsx (Next 13+ convention).
   };
 }

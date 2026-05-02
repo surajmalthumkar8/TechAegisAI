@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { LazyVideo } from "./LazyVideo";
 
 const VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4";
@@ -38,13 +39,12 @@ export function PhilosophySection() {
             transition={{ duration: 0.9, delay: 0.1 }}
             className="aspect-[4/3] overflow-hidden rounded-3xl bg-[#0a0a0a]"
           >
-            <video
+            <LazyVideo
               src={VIDEO}
               muted
               autoPlay
               loop
               playsInline
-              preload="auto"
               className="size-full object-cover"
             />
           </motion.div>

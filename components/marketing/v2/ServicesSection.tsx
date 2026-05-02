@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { LazyVideo } from "./LazyVideo";
 
 const SERVICES = [
   {
@@ -62,13 +63,12 @@ export function ServicesSection() {
               className="liquid-glass group overflow-hidden rounded-3xl"
             >
               <div className="relative aspect-video overflow-hidden">
-                <video
+                <LazyVideo
                   src={s.video}
                   muted
                   autoPlay
                   loop
                   playsInline
-                  preload="auto"
                   className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
