@@ -68,6 +68,9 @@ echo "new file" > content/blog/my-new-post.mdx
 | #6 | About + founder page | shipped |
 | #7 | Polish (gsap scroll narrative, ci, docs) | shipped |
 | #8 | Next 16 + flat ESLint + email tweak | shipped |
-| #9 | Liquid-glass redesign — homepage swap to video hero + live agent terminal + modal Cal embed; v1 marketing parked at `_archive/2026-05-02/` and `/legacy` | this PR |
+| #9 | Liquid-glass redesign — homepage swap to video hero + live agent terminal + modal Cal embed; v1 marketing parked at `_archive/2026-05-02/` and `/legacy` | shipped |
+| #10 | Brand-align v1 pages (cyan/violet → brand-red via single CSS-variable repoint) + shield logo in Navbar + Footer + real platform colors on the marquee | shipped |
 
 Plan lives in [CLAUDE.md](./CLAUDE.md).
+Conventions reference: [docs/CONVENTIONS.md](./docs/CONVENTIONS.md).
+Latest session log: [docs/sessions/2026-05-02-liquid-glass-redesign.md](./docs/sessions/2026-05-02-liquid-glass-redesign.md).

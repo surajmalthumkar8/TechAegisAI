@@ -101,3 +101,20 @@ Adjust only after `brainstorming` output agrees.
 Skills live in `~/.claude/skills/`. Claude Code auto-loads them. Invoke by name when the routing table says so — e.g., "using the `brainstorming` skill, let's explore requirements for the hero section." Do not paraphrase skill instructions; follow them.
 
 If a required skill is missing at runtime, halt and report — do not proceed without it.
+
+---
+
+## SEE ALSO — project conventions and history
+
+Before designing or restyling anything, read these:
+
+- [docs/CONVENTIONS.md](./docs/CONVENTIONS.md) — brand-red color tokens, Instrument Serif typography, liquid-glass utilities, `useBookingDialog` API, `LazyVideo` rule, component organization, and the production-critical don't-touch list. **All new code must follow these.** Drift them and the visual coherence the redesign won starts leaking.
+- [docs/sessions/2026-05-02-liquid-glass-redesign.md](./docs/sessions/2026-05-02-liquid-glass-redesign.md) — full architecture decisions and history of the liquid-glass redesign (PRs #9 + #10).
+
+If your task touches color, typography, the booking flow, the marquee, or any v2 component under `components/marketing/v2/`, the conventions doc takes precedence over imitating older v1 components.
+
+## SUB-AGENTS
+
+Project-local agents live in `.claude/agents/`:
+
+- **brand-guardian** — read-only auditor. Run before merging any PR that touches marketing components, booking flow, layout chrome, or design tokens. It diffs the branch against `main`, flags cyan/violet leakage, wrong logo refs, hero email redirects, raw below-fold videos, and CalEmbed regressions, and produces a structured report (no edits, no commits). Invoke via `Agent({ subagent_type: "brand-guardian", prompt: "review PR #N" })` or pass a branch name / commit range.
