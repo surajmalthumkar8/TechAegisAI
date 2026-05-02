@@ -109,7 +109,6 @@ export function HeroVideo() {
               href="/"
               className="flex items-center gap-2.5 text-lg font-semibold tracking-tight"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.png"
                 alt=""
