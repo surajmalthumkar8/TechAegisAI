@@ -1,10 +1,3 @@
-import { Hero } from "@/components/marketing/Hero";
-import { MarqueeLogos } from "@/components/marketing/MarqueeLogos";
-import { ServicesGrid } from "@/components/marketing/ServicesGrid";
-import { MetricBand } from "@/components/marketing/MetricBand";
-import { HowWeShip } from "@/components/marketing/HowWeShip";
-import { FeaturedCaseStudies } from "@/components/marketing/FeaturedCaseStudies";
-import { Testimonials } from "@/components/marketing/Testimonials";
 import { CTABand } from "@/components/layout/CTABand";
 import { buildMetadata } from "@/lib/seo";
 
@@ -17,13 +10,17 @@ export const metadata = buildMetadata({
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <MarqueeLogos />
-      <ServicesGrid />
-      <MetricBand />
-      <HowWeShip />
-      <FeaturedCaseStudies />
-      <Testimonials />
+      <section className="container py-32 text-center">
+        <p className="text-xs uppercase tracking-widest text-accent-cyan">
+          In progress
+        </p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight md:text-6xl">
+          Redesign in flight.
+        </h1>
+        <p className="mx-auto mt-4 max-w-md text-muted-foreground">
+          New liquid-glass landing arriving in the next commit on this branch.
+        </p>
+      </section>
       <CTABand />
     </>
   );
