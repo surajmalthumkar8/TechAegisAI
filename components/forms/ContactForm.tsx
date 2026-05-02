@@ -8,7 +8,7 @@ import { submitContact, type ContactState } from "@/app/actions/contact";
 
 const initial: ContactState = { status: "idle" };
 
-export function ContactForm() {
+export function ContactForm({ defaultEmail }: { defaultEmail?: string }) {
   const [state, action, pending] = useActionState(submitContact, initial);
 
   useEffect(() => {
@@ -57,6 +57,7 @@ export function ContactForm() {
           type="email"
           autoComplete="email"
           required
+          defaultValue={defaultEmail}
           className="w-full rounded-md border border-border bg-surface/60 px-4 py-2.5 text-sm outline-none transition-colors focus:border-accent-cyan"
         />
       </Field>

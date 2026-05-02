@@ -11,7 +11,12 @@ export const metadata = buildMetadata({
   path: "/contact",
 });
 
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ email?: string }>;
+}) {
+  const { email } = await searchParams;
   return (
     <>
       <section className="relative overflow-hidden border-b border-border py-24">
@@ -46,7 +51,7 @@ export default function ContactPage() {
             </p>
 
             <div className="mt-10">
-              <ContactForm />
+              <ContactForm defaultEmail={email} />
             </div>
           </div>
 
