@@ -40,9 +40,13 @@ export function Navbar() {
     >
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="group flex items-center gap-2">
-          <span className="relative flex h-7 w-7 items-center justify-center rounded-md bg-accent-gradient shadow-[0_0_20px_-4px_hsl(var(--accent-violet)/0.7)]">
-            <span className="text-[11px] font-bold text-background">TA</span>
-          </span>
+          <img
+            src="/logo.svg"
+            alt=""
+            width={28}
+            height={28}
+            className="size-7 shrink-0"
+          />
           <span className="text-sm font-semibold tracking-tight">TechAegisAI</span>
         </Link>
 

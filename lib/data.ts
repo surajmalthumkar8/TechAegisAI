@@ -125,22 +125,24 @@ export const logos = [
 ];
 
 // Real platforms our agents reach into. Categorical lucide icons (no brand
-// SVGs) so we side-step trademark concerns. Names match what shows up in the
-// LiveAgent pipeline so the visual story ties together top-to-bottom.
-export type StackItem = { icon: LucideIcon; name: string };
+// SVGs — we side-step trademark concerns) but tinted with each platform's
+// real brand color so the row reads instantly as "stuff you already use".
+// Names match what shows up in the LiveAgent pipeline so the visual story
+// ties together top-to-bottom.
+export type StackItem = { icon: LucideIcon; name: string; color: string };
 
 export const stack: StackItem[] = [
-  { icon: Database, name: "Postgres" },
-  { icon: CreditCard, name: "Stripe" },
-  { icon: Mail, name: "Gmail" },
-  { icon: Send, name: "Slack" },
-  { icon: FileText, name: "Notion" },
-  { icon: GitPullRequest, name: "GitHub" },
-  { icon: LineChart, name: "HubSpot" },
-  { icon: ShoppingCart, name: "Shopify" },
-  { icon: Headphones, name: "Zendesk" },
-  { icon: Sparkles, name: "OpenAI" },
-  { icon: Atom, name: "Anthropic" },
-  { icon: Activity, name: "Datadog" },
-  { icon: Cloud, name: "AWS" },
+  { icon: Database, name: "Postgres", color: "#4f8fc0" },
+  { icon: CreditCard, name: "Stripe", color: "#9d8cff" },
+  { icon: Mail, name: "Gmail", color: "#ea4335" },
+  { icon: Send, name: "Slack", color: "#e01e5a" },
+  { icon: FileText, name: "Notion", color: "#e8e6e3" },
+  { icon: GitPullRequest, name: "GitHub", color: "#ffffff" },
+  { icon: LineChart, name: "HubSpot", color: "#ff7a59" },
+  { icon: ShoppingCart, name: "Shopify", color: "#95bf47" },
+  { icon: Headphones, name: "Zendesk", color: "#5fcb78" },
+  { icon: Sparkles, name: "OpenAI", color: "#10a37f" },
+  { icon: Atom, name: "Anthropic", color: "#d4a27f" },
+  { icon: Activity, name: "Datadog", color: "#a78bfa" },
+  { icon: Cloud, name: "AWS", color: "#ff9900" },
 ];

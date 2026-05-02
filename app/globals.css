@@ -14,8 +14,13 @@
     --ring: 189 94% 53%;
     --primary: 0 0% 98%;
     --primary-foreground: 240 6% 5%;
-    --accent-cyan: 189 94% 53%;
-    --accent-violet: 258 90% 66%;
+    /* Brand-red palette. Originally cyan/violet from v1; repointed to red so
+       every accent-cyan / accent-violet utility on legacy pages (eyebrows,
+       gradient text, ambient blurs, gradient buttons) reads as brand red
+       without touching each component. New v2 components use explicit
+       brand-red-soft / brand-red tokens and are unaffected. */
+    --accent-cyan: 0 100% 68%;
+    --accent-violet: 355 65% 45%;
   }
 
   * {
