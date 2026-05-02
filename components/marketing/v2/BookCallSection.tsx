@@ -7,7 +7,7 @@ import { ArrowRight, Calendar, CheckCircle2, Sparkles } from "lucide-react";
 import { BookCallDialog } from "@/components/booking/BookCallDialog";
 
 const PERKS = [
-  "90-minute working session, not a sales pitch",
+  "60-minute call, not a sales pitch",
   "Build/buy call and target cost-per-run, in writing",
   "Eval rubric drafted live on your messiest workflow",
   "NDA returned in < 24 hours",
@@ -81,15 +81,14 @@ export function BookCallSection() {
             >
               One workflow.
               <br />
-              <span className="text-brand-red-soft">Ninety days.</span>
+              <span className="text-brand-red-soft">A 60-min call.</span>
               <br />
               An agent your team owns.
             </h2>
 
             <p className="mx-auto mb-10 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
-              Bring your messiest workflow to a 90-minute working session.
-              We&apos;ll leave with a build/buy call, a target cost-per-run,
-              and a date.
+              Bring your messiest workflow to a 60-minute call. We&apos;ll
+              leave with a build/buy call, a target cost-per-run, and a date.
             </p>
 
             <div className="mx-auto mb-10 grid max-w-2xl grid-cols-1 gap-3 text-left sm:grid-cols-2">
@@ -121,7 +120,7 @@ export function BookCallSection() {
                 className="inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 text-sm font-medium text-black shadow-2xl shadow-brand-red-soft/30"
               >
                 <Calendar size={16} />
-                Book working session
+                Book a 60-min call
                 <ArrowRight size={16} />
               </motion.button>
               <Link
