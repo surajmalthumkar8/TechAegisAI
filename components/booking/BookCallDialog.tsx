@@ -8,9 +8,11 @@ import { CalEmbed } from "./CalEmbed";
 export function BookCallDialog({
   open,
   onClose,
+  prefillEmail,
 }: {
   open: boolean;
   onClose: () => void;
+  prefillEmail?: string;
 }) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -65,7 +67,7 @@ export function BookCallDialog({
               <X className="size-4" />
             </button>
             <div className="p-4 md:p-6">
-              <CalEmbed />
+              <CalEmbed prefillEmail={prefillEmail} />
             </div>
           </motion.div>
         </motion.div>

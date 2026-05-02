@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Linkedin, Github } from "lucide-react";
+import { useBookingDialog } from "@/components/booking/BookingDialogProvider";
 
 const HERO_VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4";
@@ -25,7 +25,7 @@ const SOCIALS = [
 
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const router = useRouter();
+  const { open: openBookingDialog } = useBookingDialog();
   const [email, setEmail] = useState("");
 
   useEffect(() => {
@@ -83,10 +83,7 @@ export function HeroVideo() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = email.trim();
-    const target = trimmed
-      ? `/contact?email=${encodeURIComponent(trimmed)}#book`
-      : "/contact#book";
-    router.push(target);
+    openBookingDialog(trimmed ? { email: trimmed } : undefined);
   };
 
   return (
@@ -141,12 +138,13 @@ export function HeroVideo() {
               </a>
             </nav>
           </div>
-          <Link
-            href="#book"
+          <button
+            type="button"
+            onClick={() => openBookingDialog()}
             className="liquid-glass rounded-full px-6 py-2 text-sm font-medium text-white"
           >
             Book a call
-          </Link>
+          </button>
         </div>
       </div>
 

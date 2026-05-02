@@ -7,6 +7,7 @@ import { PhilosophySection } from "@/components/marketing/v2/PhilosophySection";
 import { ServicesSection } from "@/components/marketing/v2/ServicesSection";
 import { MetricBand } from "@/components/marketing/MetricBand";
 import { BookCallSection } from "@/components/marketing/v2/BookCallSection";
+import { BookingDialogProvider } from "@/components/booking/BookingDialogProvider";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -17,7 +18,7 @@ export const metadata = buildMetadata({
 
 export default function HomePage() {
   return (
-    <>
+    <BookingDialogProvider>
       <HeroVideo />
       <MarqueeLogos />
       <AboutSection />
@@ -27,6 +28,6 @@ export default function HomePage() {
       <ServicesSection />
       <MetricBand />
       <BookCallSection />
-    </>
+    </BookingDialogProvider>
   );
 }

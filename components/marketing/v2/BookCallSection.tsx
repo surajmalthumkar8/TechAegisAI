@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Calendar, CheckCircle2, Sparkles } from "lucide-react";
-import { BookCallDialog } from "@/components/booking/BookCallDialog";
+import { useBookingDialog } from "@/components/booking/BookingDialogProvider";
 
 const PERKS = [
   "60-minute call, not a sales pitch",
@@ -17,7 +17,7 @@ export function BookCallSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [hover, setHover] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const { open: openBookingDialog } = useBookingDialog();
 
   return (
     <>
@@ -116,7 +116,7 @@ export function BookCallSection() {
                 whileTap={{ scale: 0.97 }}
                 onHoverStart={() => setHover(true)}
                 onHoverEnd={() => setHover(false)}
-                onClick={() => setDialogOpen(true)}
+                onClick={() => openBookingDialog()}
                 className="inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 text-sm font-medium text-black shadow-2xl shadow-brand-red-soft/30"
               >
                 <Calendar size={16} />
@@ -141,11 +141,6 @@ export function BookCallSection() {
           </motion.div>
         </div>
       </section>
-
-      <BookCallDialog
-        open={dialogOpen}
-        onClose={() => setDialogOpen(false)}
-      />
     </>
   );
 }
