@@ -34,10 +34,16 @@ const config: Config = {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
+        brand: {
+          red: "#e23a3e",
+          "red-deep": "#b71f23",
+          "red-soft": "#ff5e62",
+        },
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+        serif: ["var(--font-instrument-serif)", "serif"],
       },
       fontSize: {
         display: [
