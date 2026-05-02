@@ -2,7 +2,7 @@ import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 export default [
-  { ignores: [".next/**", "node_modules/**", "pnpm-lock.yaml", "public/**"] },
+  { ignores: [".next/**", "node_modules/**", "pnpm-lock.yaml", "public/**", "_archive/**"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

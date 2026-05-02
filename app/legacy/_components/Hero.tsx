@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HeroCanvas } from "@/components/three/HeroCanvas";
+import { HeroCanvas } from "./HeroCanvas";
 
 export function Hero() {
   return (

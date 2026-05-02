@@ -1,11 +1,13 @@
-import { Hero } from "@/components/marketing/Hero";
+import { HeroVideo } from "@/components/marketing/v2/HeroVideo";
 import { MarqueeLogos } from "@/components/marketing/MarqueeLogos";
-import { ServicesGrid } from "@/components/marketing/ServicesGrid";
+import { AboutSection } from "@/components/marketing/v2/AboutSection";
+import { FeaturedVideoSection } from "@/components/marketing/v2/FeaturedVideoSection";
+import { LiveAgentSection } from "@/components/marketing/v2/LiveAgentSection";
+import { PhilosophySection } from "@/components/marketing/v2/PhilosophySection";
+import { ServicesSection } from "@/components/marketing/v2/ServicesSection";
 import { MetricBand } from "@/components/marketing/MetricBand";
-import { HowWeShip } from "@/components/marketing/HowWeShip";
-import { FeaturedCaseStudies } from "@/components/marketing/FeaturedCaseStudies";
-import { Testimonials } from "@/components/marketing/Testimonials";
-import { CTABand } from "@/components/layout/CTABand";
+import { BookCallSection } from "@/components/marketing/v2/BookCallSection";
+import { BookingDialogProvider } from "@/components/booking/BookingDialogProvider";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -16,15 +18,16 @@ export const metadata = buildMetadata({
 
 export default function HomePage() {
   return (
-    <>
-      <Hero />
+    <BookingDialogProvider>
+      <HeroVideo />
       <MarqueeLogos />
-      <ServicesGrid />
+      <AboutSection />
+      <FeaturedVideoSection />
+      <LiveAgentSection />
+      <PhilosophySection />
+      <ServicesSection />
       <MetricBand />
-      <HowWeShip />
-      <FeaturedCaseStudies />
-      <Testimonials />
-      <CTABand />
-    </>
+      <BookCallSection />
+    </BookingDialogProvider>
   );
 }

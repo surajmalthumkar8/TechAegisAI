@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -16,6 +17,7 @@ const nav = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -23,6 +25,10 @@ export function Navbar() {
   useEffect(() => {
     return scrollY.on("change", (v) => setScrolled(v > 8));
   }, [scrollY]);
+
+  // Homepage uses its own liquid-glass pill nav inside the new hero — hide global
+  // Navbar there to avoid two stacked navs.
+  if (pathname === "/") return null;
 
   return (
     <motion.header
